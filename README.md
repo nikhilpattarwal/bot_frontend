@@ -1,46 +1,55 @@
-# Getting Started with Create React App
+# Telegram WebApp Clicker Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a clicker game integrated with a Telegram WebApp. Users can earn coins by tapping a button, with a daily coin limit enforced. The application uses WebSockets to fetch user data, GraphQL for handling backend queries and mutations, and Supabase for database management.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Coin Management**: Users can tap the button to earn coins. Coin balance is updated and stored in Supabase.
+- **Daily Limit**: Users can earn up to 500 coins per day. Remaining taps and daily limit information are displayed.
+- **Real-time Data**: The app fetches real-time data using WebSockets for user interaction and coin updates.
+- **Telegram WebApp Integration**: The app is designed to work inside Telegram WebApp with user authentication.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React.js** for frontend development.
+- **GraphQL** with Yoga for backend API queries and mutations.
+- **Supabase** for database management.
+- **WebSockets** for real-time user interaction and data updates.
+- **Express.js** for handling backend routing and CORS.
+- **Telegram Bot API** for integrating the clicker game inside Telegram.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone [https://github.com/your-repo.git](https://github.com/nikhilpattarwal/bot_frontend/)
+cd bot_frontend
 
-### `npm run build`
+## Install the required dependencies:
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Set up the environment variables in a .env file:
+SUPABASE_URL=<Your Supabase URL>
+SUPABASE_KEY=<Your Supabase Key>
+PORT=<Backend Port>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Frontend Components
+App.tsx
+The main component that handles the game logic, fetching coin balances, and updating the state. It interacts with the WebSocket server and updates the user's coin balance via GraphQL.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+TapButton.tsx
+A button component that allows the user to tap and earn coins.
 
-### `npm run eject`
+CoinBalance.tsx
+Displays the user's current coin balance and the remaining number of coins they can earn for the day.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ProgressBar.tsx
+A progress bar component showing the user's progress towards the daily coin limit.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+WebSocket Integration
+WebSocket is used to receive real-time updates of user IDs when they interact with the game. The WebSocket server runs at wss://telegram-bot-3rp6.onrender.com.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Deploying the Backend
+The backend can be hosted on platforms like Render or Vercel. Ensure that the WebSocket server and the GraphQL API are running and accessible from the frontend.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
