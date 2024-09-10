@@ -30,25 +30,24 @@ const App: React.FC = () => {
   const [dailyRemaining, setDailyRemaining] = useState<number>(DAILY_LIMIT); 
   const [userId, setUserId] = useState<number>(0);
   const [ws, setWs] = useState<WebSocket | null>(null);
-
+  const [loading,setLoading] =useState<boolean>(true); 
+  const storedDailyRemaining = Number(localStorage.getItem('dailyRemaining'));
+  const storedDate = localStorage.getItem('lastResetDate');
   useEffect(() => {
-    const storedBalance = Number(localStorage.getItem('balance')) || 0;
-    const storedDailyRemaining = Number(localStorage.getItem('dailyRemaining')) || DAILY_LIMIT; 
-    const storedDate = localStorage.getItem('lastResetDate');
     
     const today = new Date().toDateString();
-    
-    if (storedDate !== today) {
+  
+    if (!storedDate || storedDate !== today) {
       localStorage.setItem('lastResetDate', today);
       setDailyRemaining(DAILY_LIMIT);
       localStorage.setItem('dailyRemaining', DAILY_LIMIT.toString());
     } else {
       setDailyRemaining(storedDailyRemaining);
     }
-    
-    // setBalance(storedBalance);
   }, []);
 
+
+ //fetch balance
   const fetchCoinBalance = async (userId: string) => {
     try {
       const response = await fetch(GRAPHQL_ENDPOINT, {
@@ -77,6 +76,7 @@ const App: React.FC = () => {
       fetchCoinBalance(userId.toString()).then((balance) => {
         if (balance !== undefined) {
           setBalance(balance);
+          setLoading(false);
           localStorage.setItem('balance', balance.toString());
         }
       });
@@ -85,6 +85,9 @@ const App: React.FC = () => {
 
 
   const socket = new WebSocket('wss://telegram-bot-3rp6.onrender.com');
+  // const socket = new WebSocket('ws://localhost:8080');
+
+  //web socket
   const connectWebSocket = () => {
 
     socket.onopen = () => {
@@ -126,7 +129,7 @@ const App: React.FC = () => {
   useEffect(() => {
     
     if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
-      window.Telegram.WebApp.init();
+    
   
       const user = window.Telegram.WebApp.initDataUnsafe?.user;
   
@@ -145,8 +148,10 @@ const App: React.FC = () => {
     localStorage.setItem('balance', newBalance.toString());
     localStorage.setItem('dailyRemaining', newDailyRemaining.toString());
   };
-
+  
+  // tap function for adding coins
   const handleTap = async () => {
+    if(dailyRemaining >0){
     const newBalance = balance + 1;
     const newDailyRemaining = dailyRemaining - 1;
 
@@ -208,14 +213,21 @@ const App: React.FC = () => {
     } catch (error) {
       console.error('Error updating or fetching coins:', error);
     }
+  }
   };
 
   return (
     <div className="App">
-      <CoinBalance balance={balance} remaining={dailyRemaining}/>
-      <TapButton onClick={handleTap} />
-      <ProgressBar value={DAILY_LIMIT - dailyRemaining} max={DAILY_LIMIT} />
-    </div>
+    {loading? (
+      <div className="loader">Loading...</div>
+    ) : (
+      <>
+        <CoinBalance balance={balance} remaining={dailyRemaining} />
+        <TapButton onClick={handleTap} />
+        <ProgressBar value={DAILY_LIMIT - dailyRemaining} max={DAILY_LIMIT} />
+      </>
+     )}
+  </div>
   );
 };
 

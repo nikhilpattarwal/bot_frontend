@@ -15,7 +15,7 @@ const CoinBalance: React.FC<CoinBalanceProps> = ({ balance,remaining }) => {
       </div>
       <div className='cont-box'>
         <div className="max-coins">
-          Remaining {remaining}
+          Remaining: {remaining}
         </div>
         <div className="max-coins">Daily Limit: {maxCoins} </div>
       </div>
