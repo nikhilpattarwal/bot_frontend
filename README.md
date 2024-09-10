@@ -30,9 +30,13 @@ cd bot_frontend
 npm install
 
 ## Set up the environment variables in a .env file:
+
 SUPABASE_URL=<Your Supabase URL>
+
 SUPABASE_KEY=<Your Supabase Key>
+
 PORT=<Backend Port>
+
 
 Frontend Components
 App.tsx
