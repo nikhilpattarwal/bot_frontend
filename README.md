@@ -22,7 +22,7 @@ This project is a clicker game integrated with a Telegram WebApp. Users can earn
 
 1. Clone the repository:
 
-```bash
+
 git clone [https://github.com/your-repo.git](https://github.com/nikhilpattarwal/bot_frontend/)
 cd bot_frontend
 
