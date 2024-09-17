@@ -57,3 +57,11 @@ WebSocket is used to receive real-time updates of user IDs when they interact wi
 Deploying the Backend
 The backend can be hosted on platforms like Render or Vercel. Ensure that the WebSocket server and the GraphQL API are running and accessible from the frontend.
 
+## Latest Update (OFFLINE MODE)
+1. Added contextApi for getting online status using navigator.onLine.
+2. Used localStorage for adding offline coins.
+3. Maintaining total balance in local storage, used for conflicts, comparing latest and offline coins and database's coins.
+4. Syncing offline coins with database.
+5. A retry method for fetching coins if network error or any interruption.
+6. Updated UI for offline, online and syncing update.
+
