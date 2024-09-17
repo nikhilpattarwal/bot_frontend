@@ -1,0 +1,74 @@
+.offline-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff5e57;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.5s ease-out;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .online-banner{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #107c00;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.5s ease-out;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .offline-banner-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .offline-banner i {
+    font-size: 20px;
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(0%);
+    }
+    to {
+      transform: translateY(-100);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  .offline-banner span {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
